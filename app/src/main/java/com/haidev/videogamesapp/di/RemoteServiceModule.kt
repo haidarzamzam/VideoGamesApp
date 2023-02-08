@@ -1,4 +1,4 @@
-package com.haidev.videogamesapp.source.remote
+package com.haidev.videogamesapp.di
 
 import com.haidev.videogamesapp.BuildConfig
 import com.haidev.videogamesapp.source.api.ApiService
@@ -17,7 +17,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object ApiClient {
+object RemoteServiceModule {
     @Singleton
     @Provides
     fun provideCacheInterceptor() = run {
