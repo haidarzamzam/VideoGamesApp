@@ -66,6 +66,7 @@ dependencies {
 
     //Local Database
     implementation "androidx.room:room-runtime:$roomVersion"
+    testImplementation 'org.junit.jupiter:junit-jupiter'
     kapt "androidx.room:room-compiler:$roomVersion"
     implementation "androidx.room:room-ktx:$roomVersion"
     testImplementation "androidx.room:room-testing:$roomVersion"
@@ -73,6 +74,10 @@ dependencies {
     //Dependency Injection
     implementation "com.google.dagger:hilt-android:$hiltVersion"
     kapt "com.google.dagger:hilt-compiler:$hiltVersion"
+
+    testImplementation "com.google.dagger:hilt-android-testing:$hiltVersion"
+    testAnnotationProcessor "com.google.dagger:hilt-compiler:$hiltVersion"
+    testImplementation "org.mockito.kotlin:mockito-kotlin:4.1.0"
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
