@@ -4,13 +4,14 @@ import com.haidev.videogamesapp.contract.VideoGamesContract
 import com.haidev.videogamesapp.model.VideoGamesModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.*
+import javax.inject.Inject
 
-class VideoGamesPresenter(
-    private val videoGamesView: VideoGamesContract.VideoGamesView,
+class VideoGamesPresenter @Inject constructor(
+    private val videoGamesView: VideoGamesContract.View,
     private val videoGamesModel: VideoGamesModel,
     private val coroutineScope: CoroutineScope
-) {
-    fun onAttach() {
+) : VideoGamesContract.Presenter {
+    override fun onAttach() {
         callVideoGamesApi()
     }
 

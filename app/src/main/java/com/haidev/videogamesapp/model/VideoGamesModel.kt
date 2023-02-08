@@ -7,8 +7,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
+import javax.inject.Inject
 
-class VideoGamesModel(private val apiService: ApiService) {
+class VideoGamesModel @Inject constructor(private val apiService: ApiService) {
     fun callVideoGamesApi(): Flow<VideoGamesListResponse> {
         return flow {
             val carbonOffsetResponse =
