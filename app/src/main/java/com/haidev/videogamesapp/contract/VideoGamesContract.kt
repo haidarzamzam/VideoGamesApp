@@ -4,8 +4,8 @@ import com.haidev.videogamesapp.data.VideoGamesListResponse
 
 interface VideoGamesContract {
     interface VideoGamesView {
-        fun showMoviesList(videoGamesListResponse: VideoGamesListResponse)
-        fun showErrorView(throwable: Throwable)
+        fun showVideoGamesList(videoGamesListResponse: VideoGamesListResponse)
+        fun showErrorView()
         fun showLoadingView()
         fun hideLoadingView()
     }

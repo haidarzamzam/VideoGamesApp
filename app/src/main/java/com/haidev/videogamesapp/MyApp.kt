@@ -2,10 +2,7 @@ package com.haidev.videogamesapp
 
 import android.app.Application
 import android.content.Context
-import com.haidev.videogamesapp.di.modelModule
-import com.haidev.videogamesapp.di.presenterModule
-import com.haidev.videogamesapp.di.remoteModule
-import com.haidev.videogamesapp.di.viewModule
+import com.haidev.videogamesapp.di.*
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -27,6 +24,7 @@ class MyApp : Application() {
             modules(
                 listOf(
                     viewModule,
+                    contractModule,
                     presenterModule,
                     modelModule,
                     remoteModule
