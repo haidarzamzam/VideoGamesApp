@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -18,9 +19,15 @@ android {
     }
 
     buildTypes {
+        debug {
+            buildConfigField "String", "API_URL", "\"https://api.rawg.io/api/\""
+            buildConfigField "String", "API_KEY", "\"8b1bf6c2208a42758fb744796c35e631\""
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "API_URL", "\"https://api.rawg.io/api/\""
+            buildConfigField "String", "API_KEY", "\"8b1bf6c2208a42758fb744796c35e631\""
         }
     }
     compileOptions {
@@ -30,14 +37,39 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
-
-    implementation 'androidx.core:core-ktx:1.7.0'
+    implementation 'androidx.core:core-ktx:1.9.0'
     implementation 'androidx.appcompat:appcompat:1.6.0'
     implementation 'com.google.android.material:material:1.8.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+
+    //Networking
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"
+    implementation 'com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.10'
+
+    //Coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVerstion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVerstion"
+
+    //Additional lib for UI
+    implementation "com.github.bumptech.glide:glide:$glideVersion"
+
+    //Local Database
+    implementation "androidx.room:room-runtime:$roomVersion"
+    kapt "androidx.room:room-compiler:$roomVersion"
+    implementation "androidx.room:room-ktx:$roomVersion"
+    testImplementation "androidx.room:room-testing:$roomVersion"
+
+    //Dependency Injection
+    implementation "io.insert-koin:koin-android:$koinVersion"
+
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
