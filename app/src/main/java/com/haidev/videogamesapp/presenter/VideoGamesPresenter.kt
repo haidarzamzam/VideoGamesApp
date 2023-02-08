@@ -18,12 +18,16 @@ class VideoGamesPresenter @Inject constructor(
     private fun callVideoGamesApi() {
         videoGamesModel.callVideoGamesApi().onStart {
             videoGamesView.showLoadingView()
-        }.catch {
-            videoGamesView.showErrorView()
-        }.onEach {
-            videoGamesView.showVideoGamesList(it)
-        }.onCompletion {
-            videoGamesView.hideLoadingView()
-        }.launchIn(coroutineScope)
+        }
+            .catch {
+                videoGamesView.showErrorView()
+            }
+            .onEach {
+                videoGamesView.showVideoGamesList(it)
+            }
+            .onCompletion {
+                videoGamesView.hideLoadingView()
+            }
+            .launchIn(coroutineScope)
     }
 }

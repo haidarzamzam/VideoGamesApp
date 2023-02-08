@@ -4,7 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/color_secondary"
     tools:context=".view.VideoGamesActivity">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_video_games"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
     <ProgressBar
         android:id="@+id/pb_loading"

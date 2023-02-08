@@ -12,9 +12,9 @@ import javax.inject.Inject
 class VideoGamesModel @Inject constructor(private val apiService: ApiService) {
     fun callVideoGamesApi(): Flow<VideoGamesListResponse> {
         return flow {
-            val carbonOffsetResponse =
+            val rawgVideoGameResponse =
                 apiService.getVideoGameList(BuildConfig.API_KEY)
-            emit(carbonOffsetResponse)
+            emit(rawgVideoGameResponse)
         }.flowOn(Dispatchers.IO)
     }
 }
