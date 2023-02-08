@@ -7,5 +7,7 @@ import retrofit2.http.Query
 
 interface ApiService {
     @GET("games")
-    suspend fun getVideoGameList(@Query("key") key: String): VideoGamesListResponse
+    suspend fun getVideoGameList(
+        @Query("key") key: String
+    ): VideoGamesListResponse
 }

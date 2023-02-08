@@ -29,11 +29,12 @@ class VideoGamesActivity : AppCompatActivity(), VideoGamesContract.View {
         presenter.onAttach()
     }
 
-    override fun showVideoGamesList(videoGamesListResponse: VideoGamesListResponse) {
+    override fun showVideoGamesList(videoGamesListResponse: List<VideoGamesListResponse.Result>) {
+        binding.pbLoading.visibility = View.GONE
         with(binding.rvVideoGames) {
             adapter = adapterVideoGames
             layoutManager = LinearLayoutManager(this@VideoGamesActivity)
-            adapterVideoGames.updateVideoGamesItemsList(videoGamesListResponse.results)
+            adapterVideoGames.updateVideoGamesItemsList(videoGamesListResponse)
         }
     }
 
