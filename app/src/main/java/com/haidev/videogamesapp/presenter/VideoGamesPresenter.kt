@@ -18,7 +18,6 @@ class VideoGamesPresenter @Inject constructor(
     }
 
     private fun callVideoGamesApi() {
-
         videoGamesRepository.getVideoGames()
             .onStart {
                 videoGamesView.showLoadingView()

@@ -63,6 +63,7 @@ dependencies {
 
     //Additional lib for UI
     implementation "com.github.bumptech.glide:glide:$glideVersion"
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
 
     //Local Database
     implementation "androidx.room:room-runtime:$roomVersion"

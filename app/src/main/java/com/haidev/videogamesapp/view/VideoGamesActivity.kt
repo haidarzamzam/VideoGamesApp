@@ -2,7 +2,6 @@ package com.haidev.videogamesapp.view
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.haidev.videogamesapp.contract.VideoGamesContract
@@ -27,6 +26,15 @@ class VideoGamesActivity : AppCompatActivity(), VideoGamesContract.View {
         setContentView(binding.root)
 
         presenter.onAttach()
+        initUI()
+    }
+
+    private fun initUI() {
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            binding.tvError.visibility = View.GONE
+            presenter.onAttach()
+            binding.swipeRefreshLayout.isRefreshing = false
+        }
     }
 
     override fun showVideoGamesList(videoGamesModel: List<VideoGamesModel.Result>) {
@@ -40,8 +48,7 @@ class VideoGamesActivity : AppCompatActivity(), VideoGamesContract.View {
 
     override fun showErrorView() {
         binding.pbLoading.visibility = View.GONE
-        Toast.makeText(this, "Sorry, the request failed, please try again later", Toast.LENGTH_LONG)
-            .show()
+        binding.tvError.visibility = View.VISIBLE
     }
 
     override fun showLoadingView() {
