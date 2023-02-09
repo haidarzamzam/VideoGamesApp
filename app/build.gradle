@@ -63,6 +63,7 @@ dependencies {
     //Additional lib for UI
     implementation "com.github.bumptech.glide:glide:$glideVersion"
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:$swipeRefreshLayout"
+    implementation "com.github.ybq:Android-SpinKit:$spinKitVersion"
 
     //Local Database
     implementation "androidx.room:room-runtime:$roomVersion"
@@ -76,8 +77,8 @@ dependencies {
 
     //Unit Test
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVerstion"
-    testImplementation "io.mockk:mockk-android:${mockkVersion}"
-    testImplementation "io.mockk:mockk-agent:${mockkVersion}"
+    testImplementation "io.mockk:mockk-android:$mockkVersion"
+    testImplementation "io.mockk:mockk-agent:$mockkVersion"
 
     //Instrument Test
     implementation "androidx.test.espresso:espresso-contrib:$espressoVersion"

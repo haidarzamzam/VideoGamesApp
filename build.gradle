@@ -23,4 +23,5 @@ ext {
     constraintLayoutVersion = '2.1.4'
     swipeRefreshLayout = '1.1.0'
     glideVersion = '4.14.2'
+    spinKitVersion = '1.4.0'
 }

@@ -38,7 +38,6 @@ class VideoGamesActivity : AppCompatActivity(), VideoGamesContract.View {
     }
 
     override fun showVideoGamesList(videoGamesModel: List<VideoGamesModel.Result>) {
-        binding.pbLoading.visibility = View.GONE
         with(binding.rvVideoGames) {
             adapter = adapterVideoGames
             layoutManager = LinearLayoutManager(this@VideoGamesActivity)
