@@ -2,7 +2,6 @@ package com.haidev.videogamesapp.di
 
 import com.haidev.videogamesapp.BuildConfig
 import com.haidev.videogamesapp.source.api.ApiService
-import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -60,7 +59,6 @@ object RemoteServiceModule {
             .baseUrl(BuildConfig.API_URL)
             .client(client)
             .addConverterFactory(GsonConverterFactory.create())
-            .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .build()
             .create(ApiService::class.java)
     }
