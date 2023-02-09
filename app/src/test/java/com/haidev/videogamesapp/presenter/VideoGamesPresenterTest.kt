@@ -13,7 +13,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.resetMain
-import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.test.setMain
 import org.junit.After
 import org.junit.Before
@@ -36,7 +36,7 @@ internal class VideoGamesPresenterTest {
     }
 
     @Test
-    fun testSuccessfulApiCall() = runBlockingTest {
+    fun testSuccessfulApiCall() = runTest {
         val response = Resource.Success(TestVideoGamesData.getVideoGamesData())
         coEvery { repository.getVideoGames() } returns flowOf(response)
 
@@ -49,7 +49,7 @@ internal class VideoGamesPresenterTest {
     }
 
     @Test
-    fun testFailedApiCall() = runBlockingTest {
+    fun testFailedApiCall() = runTest {
         val errorMessage = Throwable("error")
         every { repository.getVideoGames() } returns flowOf(Resource.Error(errorMessage))
 

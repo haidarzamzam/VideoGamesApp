@@ -79,7 +79,12 @@ dependencies {
     testImplementation "io.mockk:mockk-android:${mockkVersion}"
     testImplementation "io.mockk:mockk-agent:${mockkVersion}"
 
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    //Instrument Test
+    implementation "androidx.test.espresso:espresso-contrib:$espressoVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
+
+    androidTestImplementation "androidx.test.ext:junit:$junitVersion"
+    androidTestImplementation "androidx.test:rules:$rulesVersion"
 }
 
 kapt {
