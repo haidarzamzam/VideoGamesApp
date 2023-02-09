@@ -6,8 +6,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.haidev.videogamesapp.contract.VideoGamesContract
-import com.haidev.videogamesapp.data.VideoGamesListResponse
 import com.haidev.videogamesapp.databinding.ActivityVideoGamesBinding
+import com.haidev.videogamesapp.model.VideoGamesModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -29,12 +29,12 @@ class VideoGamesActivity : AppCompatActivity(), VideoGamesContract.View {
         presenter.onAttach()
     }
 
-    override fun showVideoGamesList(videoGamesListResponse: List<VideoGamesListResponse.Result>) {
+    override fun showVideoGamesList(videoGamesModel: List<VideoGamesModel.Result>) {
         binding.pbLoading.visibility = View.GONE
         with(binding.rvVideoGames) {
             adapter = adapterVideoGames
             layoutManager = LinearLayoutManager(this@VideoGamesActivity)
-            adapterVideoGames.updateVideoGamesItemsList(videoGamesListResponse)
+            adapterVideoGames.updateVideoGamesItemsList(videoGamesModel)
         }
     }
 

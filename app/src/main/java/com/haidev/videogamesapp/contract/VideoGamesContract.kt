@@ -1,10 +1,10 @@
 package com.haidev.videogamesapp.contract
 
-import com.haidev.videogamesapp.data.VideoGamesListResponse
+import com.haidev.videogamesapp.model.VideoGamesModel
 
 interface VideoGamesContract {
     interface View {
-        fun showVideoGamesList(videoGamesListResponse: List<VideoGamesListResponse.Result>)
+        fun showVideoGamesList(videoGamesModel: List<VideoGamesModel.Result>)
         fun showErrorView()
         fun showLoadingView()
         fun hideLoadingView()

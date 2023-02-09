@@ -9,12 +9,6 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityComponent
-import dagger.hilt.components.SingletonComponent
-import kotlinx.coroutines.CoroutineName
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.plus
-import javax.inject.Singleton
 
 @InstallIn(ActivityComponent::class)
 @Module
@@ -32,16 +26,5 @@ object ActivityModule {
     @Provides
     fun bindActivityVideoGames(activity: Activity): VideoGamesActivity {
         return activity as VideoGamesActivity
-    }
-}
-
-@Module
-@InstallIn(SingletonComponent::class)
-object CoroutineModule {
-    @Provides
-    @Singleton
-    fun provideCoroutineScope(
-    ): CoroutineScope {
-        return MainScope() + CoroutineName("VideoGamesCoroutine")
     }
 }

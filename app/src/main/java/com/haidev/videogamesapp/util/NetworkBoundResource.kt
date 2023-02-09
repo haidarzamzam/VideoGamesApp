@@ -9,19 +9,21 @@ inline fun <ResultType, RequestType> networkBoundResource(
     crossinline shouldFetch: (ResultType) -> Boolean = { true }
 ) = flow {
     val data = query().first()
-
-    val flow = if (shouldFetch(data)) {
+    val resource = if (shouldFetch(data)) {
         emit(Resource.Loading(data))
 
         try {
-            saveFetchResult(fetch())
+            val resultType = fetch()
+            saveFetchResult(resultType)
             query().map { Resource.Success(it) }
+
         } catch (throwable: Throwable) {
             query().map { Resource.Error(throwable, it) }
+
         }
     } else {
         query().map { Resource.Success(it) }
     }
 
-    emitAll(flow)
+    emitAll(resource)
 }

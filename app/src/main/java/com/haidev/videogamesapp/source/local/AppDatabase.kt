@@ -4,12 +4,12 @@ import android.app.Application
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.haidev.videogamesapp.data.VideoGamesListResponse
+import com.haidev.videogamesapp.model.VideoGamesModel
 import com.haidev.videogamesapp.source.dao.VideoGamesDao
 
 @Database(
     entities = [
-        VideoGamesListResponse.Result::class
+        VideoGamesModel.Result::class
     ], version = 1, exportSchema = false
 )
 

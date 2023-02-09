@@ -1,30 +1,45 @@
 package com.haidev.videogamesapp.presenter
 
 import com.haidev.videogamesapp.contract.VideoGamesContract
-import com.haidev.videogamesapp.model.VideoGamesModel
-import kotlinx.coroutines.CoroutineScope
+import com.haidev.videogamesapp.repository.VideoGamesRepository
+import com.haidev.videogamesapp.util.Resource
+import kotlinx.coroutines.CoroutineName
+import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.plus
 import javax.inject.Inject
 
 class VideoGamesPresenter @Inject constructor(
     private val videoGamesView: VideoGamesContract.View,
-    private val videoGamesModel: VideoGamesModel,
-    private val coroutineScope: CoroutineScope
+    private val videoGamesRepository: VideoGamesRepository
 ) : VideoGamesContract.Presenter {
     override fun onAttach() {
         callVideoGamesApi()
     }
 
     private fun callVideoGamesApi() {
-        videoGamesModel.getVideoGames()
+
+        videoGamesRepository.getVideoGames()
             .onStart {
                 videoGamesView.showLoadingView()
             }.catch {
                 videoGamesView.showErrorView()
-            }.onEach {
-                it.data?.let { data -> videoGamesView.showVideoGamesList(data) }
+            }.onEach { resource ->
+                when (resource) {
+                    is Resource.Error -> {
+                        videoGamesView.showErrorView()
+                    }
+                    is Resource.Loading -> {
+                        videoGamesView.showLoadingView()
+                    }
+                    is Resource.Success -> {
+                        videoGamesView.hideLoadingView()
+
+                    }
+                }
+                resource.data?.let { data -> videoGamesView.showVideoGamesList(data) }
             }.onCompletion {
                 videoGamesView.hideLoadingView()
-            }.launchIn(coroutineScope)
+            }.launchIn(MainScope() + CoroutineName("VideoGamesCoroutine"))
     }
 }

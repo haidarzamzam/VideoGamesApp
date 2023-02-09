@@ -1,33 +1,23 @@
 package com.haidev.videogamesapp.model
 
-import androidx.room.withTransaction
-import com.haidev.videogamesapp.BuildConfig
-import com.haidev.videogamesapp.source.api.ApiService
-import com.haidev.videogamesapp.source.local.AppDatabase
-import com.haidev.videogamesapp.util.networkBoundResource
-import kotlinx.coroutines.delay
-import javax.inject.Inject
+import android.os.Parcelable
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
-class VideoGamesModel @Inject constructor(
-    private val apiService: ApiService,
-    private val dbService: AppDatabase
-) {
-
-    private val videoGamesDao = dbService.videoGamesDao()
-
-    fun getVideoGames() = networkBoundResource(
-        query = {
-            videoGamesDao.readAllVideoGames()
-        },
-        fetch = {
-            delay(2000)
-            apiService.getVideoGameList(BuildConfig.API_KEY)
-        },
-        saveFetchResult = { videoGames ->
-            dbService.withTransaction {
-                videoGamesDao.clearVideoGames()
-                videoGamesDao.addAllVideoGames(videoGames.results)
-            }
-        }
-    )
+@Parcelize
+data class VideoGamesModel(
+    @SerializedName("results") val results: List<Result>?,
+) : Parcelable {
+    @Entity(tableName = "video_games_table")
+    @Parcelize
+    data class Result(
+        @PrimaryKey @SerializedName("id") val id: Int,
+        @SerializedName("background_image") val backgroundImage: String?,
+        @SerializedName("name") val name: String?,
+        @SerializedName("released") val released: String?,
+        @SerializedName("rating") val rating: Double?,
+        @SerializedName("added") val added: Int?,
+    ) : Parcelable
 }
